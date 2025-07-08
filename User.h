@@ -17,4 +17,8 @@ class User{
 
         // return username for bookManager
         std::string getUsername() const { return validUsername; }
+
+        void setUsername(std::string& foundUsername) {
+            validUsername = foundUsername;
+        }
 };

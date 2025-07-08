@@ -67,7 +67,7 @@ void BookManager :: addBook() {
     string title, author, genre, startDate, endDate;
 
     cout << "\n---Add New Book---" 
-         << "\nBook Title:";
+         << "\nBook Title: ";
     getline(cin, title);
     cout << "Author Name: ";
     getline(cin, author);
@@ -91,9 +91,9 @@ int BookManager :: getValidInt(const string& prompt) {
         if (cin.fail()) {
             cout << "Invalid input. Please enter a number.\n";
             cin.clear(); // clear error flags
-            cin.ignore('\n'); // ignore the rest of the line
+            cin.ignore(); // ignore the rest of the line
         } else {
-            cin.ignore('\n');
+            cin.ignore();
             return value;
         }
     }
@@ -102,8 +102,9 @@ int BookManager :: getValidInt(const string& prompt) {
 void BookManager :: updateBook() {
     if (books.empty()) {
         cout << "\nNo books to update.\n";
+        return;
     }
-
+    
     showBooks();
 
     int bookIndex = getValidInt("\nEnter the book number to update: ");
@@ -120,15 +121,15 @@ void BookManager :: updateBook() {
     cout << "Author: " << bookToUpdate.getAuthor() << endl;
     cout << "Genre: " << bookToUpdate.getGenre() << endl;
     
-    cout << "Current Start Date: " << bookToUpdate.getStartDate() << "\nEnter new start date (or leave blank to keep current): ";
+    cout << "Current Start Date: " << bookToUpdate.getStartDate() << "\nEnter new start date (MM-DD-YYYY or leave blank to keep current): ";
     string newStartDate;
     getline(cin, newStartDate);
     if (!newStartDate.empty()) bookToUpdate.setStartDate(newStartDate);
 
-    cout << "Current End Date: " << bookToUpdate.getEndDate() << "\nEnter new end date (or leave blank to keep current): ";
+    cout << "Current End Date: " << bookToUpdate.getEndDate() << "\nEnter new end date (MM-DD-YYYY or leave blank to keep current): ";
     string newEndDate;
     getline(cin, newEndDate);
-    if (!newEndDate.empty()) bookToUpdate.setStartDate(newEndDate);
+    if (!newEndDate.empty()) bookToUpdate.setEndDate(newEndDate);
 
     cout << "Enter new Progress (0-100, current: " << bookToUpdate.getProgress() << "%): ";
     string newProgressStr;
@@ -148,7 +149,7 @@ void BookManager :: updateBook() {
     if (!newRatingStr.empty()) {
         try {
             int newRating = stoi(newRatingStr);
-            bookToUpdate.setProgress(newRating);
+            bookToUpdate.setRating(newRating);
         } catch (const exception& e) {
             cout << "Invalid rating input. Keeing orginal.\n";
         }
@@ -176,7 +177,7 @@ void BookManager::removeBook() {
     // erase the book from the vector
     books.erase(books.begin() + bookIndex - 1);
     saveBooks();
-    cout << "\nBook " << removedTitle << " removed successfully!\n";
+    cout << "\nBook '" << removedTitle << "' removed successfully!\n";
 }
 
 void BookManager :: bookMenu() {
@@ -191,7 +192,7 @@ void BookManager :: bookMenu() {
         cout << "\nPlease choose an option: ";
 
         cin >> choice;
-        cin.ignore('\n');
+        cin.ignore(); // clear the newline character 
 
         switch (choice) {
             case '1':

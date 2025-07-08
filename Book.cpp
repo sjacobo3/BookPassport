@@ -20,22 +20,25 @@ void Book::setProgress(int p) {
 }
 
 void Book::setRating(int r) {
-    if (r < 1) rating = 1;
+    if (r < 0) rating = 0;
     else if (r > 5) rating = 5;
     else rating = r;
 }
 
 void Book::displayBook() const {
-    std::cout << "\n---Book Details---" 
-             << "\nTitle: " << title
+    std::cout << "Title: " << title
              << "\nAuthor: " << author
              << "\nGenre: " << genre
              << "\nStart Date: " << startDate
              << "\nEnd Date: " << endDate
-             << "\nProgress: " << progress << "%"
-             << "\nRating: " << rating << "/5"
-             << "\nReview: " << review
-             << std::endl;
+             << "\nProgress: " << progress << "%";
+             if (rating == 0) {
+                std::cout << "\nRating: " << rating; 
+             } else {
+                std::cout << "\nRating: " << rating << "/5";
+             }
+
+             std::cout << "\nReview: " << review << std::endl;
 }
 
 std::string Book::serialize() const {

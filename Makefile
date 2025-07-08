@@ -5,7 +5,7 @@ CXX = g++
 # -g: include debugging information
 CXXFLAGS = -Wall -g
 
-TARGET = my_book_app
+TARGET = book_passport
 
 # source files
 SRCS = main.cpp User.cpp Book.cpp BookManager.cpp

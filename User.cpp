@@ -21,8 +21,6 @@ void User :: signup() {
     file << validUsername << "*" << validEmail << "*" << validPassword << endl;
     file.close();
     cout << "\nRegistration successful!\n" << endl;
-    loginFlag = true;
-    
 }
 
 bool User :: isUserdataValid(const string& targetUsername, string& foundEmail, string& foundPassword) {
@@ -43,6 +41,7 @@ bool User :: isUserdataValid(const string& targetUsername, string& foundEmail, s
         string storedPassword = line.substr(pos2 + 1);
 
         if (storedUsername == targetUsername) {
+            setUsername(storedUsername);
             foundEmail = storedEmail;
             foundPassword = storedPassword;
             file.close();
@@ -66,7 +65,7 @@ bool User :: login() {
     // check if user data is valid
     if (isUserdataValid(searchUser, foundEmail, foundPassword)) {
         if (searchPass == foundPassword) {
-            cout << "\nLogin successful! Welcome, " << validUsername << "!" << endl;
+            cout << "\nLogin successful!\n";
             return true; // Exit after successful login
         } else {
             cout << "\nIncorrect password. Please try again." << endl;
@@ -91,7 +90,7 @@ void User :: forgot() {
             cout << "\nPassword recovery successful!" << endl;
             cout << "Your password is: " << foundPassword << endl;
         } else {
-            cout << "\nEmail does not match our records for this username." << endl;
+            cout << "\nEmail does not match our records for this username.\n";
         }
     } else {
         cout << "\nUsername not found. Please check your username or register if you don't have an account.\n";

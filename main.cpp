@@ -11,7 +11,7 @@ int main() {
         // display menu options
         if (user.loginFlag) {
             loggedInUser = user.getUsername();
-            std::cout << "Currently logged in as: " << loggedInUser;
+            std::cout << "\nCurrently logged in as: " << loggedInUser;
             std::cout << "\n1 - Forgot Password";
             std::cout << "\n2 - Go to Book Management";
             std::cout << "\n3 - Logout";
@@ -34,7 +34,6 @@ int main() {
                     if (user.login()) {
                         user.loginFlag = true;
                         loggedInUser = user.getUsername();
-                        std::cout << "\nWelcome " << loggedInUser << "! You are now logged in.\n";
                     } 
                 } else {
                     // user is logged in, first option is to get lost password
