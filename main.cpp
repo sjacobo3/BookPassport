@@ -11,8 +11,8 @@ int main() {
         // display menu options
         if (user.loginFlag) {
             loggedInUser = user.getUsername();
-            std::cout << "\nCurrently logged in as: " << loggedInUser << std::endl;
-            std::cout << "\n1 - Forgot/Change Password";
+            std::cout << "Currently logged in as: " << loggedInUser;
+            std::cout << "\n1 - Forgot Password";
             std::cout << "\n2 - Go to Book Management";
             std::cout << "\n3 - Logout";
             std::cout << "\n4 - Exit Program";
@@ -30,47 +30,41 @@ int main() {
 
         switch(choice) {
             case '1': {
-                if (user.login()) {
-                    user.loginFlag = true;
-                    loggedInUser = user.getUsername();
-                    std::cout << "\nWelcome " << user.getUsername() << "! You are now logged in" << std::endl;
-                    std::cout << "Returning to main menu.\n";
+                if (!user.loginFlag) {
+                    if (user.login()) {
+                        user.loginFlag = true;
+                        loggedInUser = user.getUsername();
+                        std::cout << "\nWelcome " << loggedInUser << "! You are now logged in.\n";
+                    } 
+                } else {
+                    // user is logged in, first option is to get lost password
+                    user.forgot();
                 }
                 break;
             }
             case '2':
-                user.signup();
-                break;
-            case '3':
-                user.forgot();
-                break;
-            case '4': 
-                if (user.loginFlag) {
-                    // go to book management
+                if (!user.loginFlag) {
+                    user.signup();
+                } else {
+                    // user logged in, will go to book management system
                     BookManager bookManager(loggedInUser);
                     bookManager.bookMenu();
-                } else {
-                    std::cout << "\nExiting program. Goodbye!\n";
-                    return 0;
                 }
                 break;
-            case '5':
-                if (user.loginFlag) {
-                    // logging user out
+            case '3':
+                if (!user.loginFlag) {
+                    // user not logged in, forgot password function
+                    user.forgot();
+                } else {
+                    // logging out user
                     user.loginFlag = false;
-                    loggedInUser = "";
+                    loggedInUser = "";  // clear username
                     std::cout << "\nLogged out successfully.\n";
-                } else {
-                    std::cout << "Invalid selection. Please try again.\n";
                 }
                 break;
-            case '6':
-                if (user.loginFlag) {
-                    std::cout << "\nExiting program. Goodbye!\n";
-                    return 0;
-                } else {
-                    std::cout << "Invalid selection. Please try again.\n";
-                }
+            case '4': 
+                std::cout << "\nExiting program. Goodbye!\n";
+                return 0;
                 break;
             default: 
                 std::cout << "Invalid selection. Please try again.\n";
