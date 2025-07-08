@@ -38,7 +38,7 @@ You'll need a C++ compiler installed on your system
     sudo apt update
     sudo apt install build-essential
     
-    # on macOS with Homebreq
+    # on macOS with Homebrew
     brew install gcc
     ```
 ### installation
