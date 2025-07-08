@@ -16,5 +16,5 @@ class User{
         void forgot();
 
         // return username for bookManager
-        std::string getLoggedInUser() const { return validUsername; }
+        std::string getUsername() const { return validUsername; }
 };

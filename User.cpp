@@ -5,7 +5,7 @@
 using namespace std;
 
 void User :: signup() {
-    cout << "Enter your Username: ";
+    cout << "\nEnter your Username: ";
     getline(cin, validUsername);
     cout << "Enter your Email: ";
     getline(cin, validEmail);
@@ -22,13 +22,14 @@ void User :: signup() {
     file.close();
     cout << "\nRegistration successful!\n" << endl;
     loginFlag = true;
+    
 }
 
 bool User :: isUserdataValid(const string& targetUsername, string& foundEmail, string& foundPassword) {
     // read in user data from file
     ifstream file("loginData.txt");
     if (!file.is_open()) {
-        cout << "Error: Could not open user data file.\n";
+        cout << "\nError: There is no user data.\n";
         return false;
     }
 
@@ -65,7 +66,7 @@ bool User :: login() {
     // check if user data is valid
     if (isUserdataValid(searchUser, foundEmail, foundPassword)) {
         if (searchPass == foundPassword) {
-            cout << "\nLogin successful! Welcome, " << searchUser << "!" << endl;
+            cout << "\nLogin successful! Welcome, " << validUsername << "!" << endl;
             return true; // Exit after successful login
         } else {
             cout << "\nIncorrect password. Please try again." << endl;
