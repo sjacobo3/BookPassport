@@ -5,18 +5,10 @@
 using namespace std;
 
 void User :: signup() {
-    cout << "\nEnter your first name: ";
-    getline(cin, firstName);
-
-    cout << "Enter your last name: ";
-    getline(cin, lastName);
-
     cout << "Enter your Username: ";
     getline(cin, validUsername);
-
     cout << "Enter your Email: ";
     getline(cin, validEmail);
-
     cout << "Enter your Password: ";
     getline(cin, validPassword);
 
@@ -29,6 +21,7 @@ void User :: signup() {
     file << validUsername << "*" << validEmail << "*" << validPassword << endl;
     file.close();
     cout << "\nRegistration successful!\n" << endl;
+    loginFlag = true;
 }
 
 bool User :: isUserdataValid(const string& targetUsername, string& foundEmail, string& foundPassword) {
@@ -60,12 +53,11 @@ bool User :: isUserdataValid(const string& targetUsername, string& foundEmail, s
     return false;
 }
 
-void User :: login() {
+bool User :: login() {
     // prompt user to login, storing variables to look for in file
     string searchUser, searchPass;
     cout << "\nEnter your Username: ";
     getline(cin, searchUser);
-    
     cout << "Enter your Password: ";
     getline(cin, searchPass);
 
@@ -73,14 +65,15 @@ void User :: login() {
     // check if user data is valid
     if (isUserdataValid(searchUser, foundEmail, foundPassword)) {
         if (searchPass == foundPassword) {
-            cout << "\nLogin successful! Welcome, " << firstName << " " << lastName << "!" << endl;
-            return; // Exit after successful login
+            cout << "\nLogin successful! Welcome, " << searchUser << "!" << endl;
+            return true; // Exit after successful login
         } else {
             cout << "\nIncorrect password. Please try again." << endl;
-            return; // Exit after failed password attempt
+            return false; // Exit after failed password attempt
         }
     } else {
         cout << "\nUsername not found. Please check your username or register if you don't have an account." << endl;
+        return false;
     }
 }
 
