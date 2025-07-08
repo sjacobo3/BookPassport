@@ -56,7 +56,7 @@ You'll need a C++ compiler installed on your system
 ## usage
 After successful compilation, run the application from your terminal:
 ```sh
-./my_book_app
+./book_passport
 ```
 The program presents you with a main menu:
 1. Login: Access your existing account.
