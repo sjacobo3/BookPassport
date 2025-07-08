@@ -69,3 +69,4 @@ Once logged in, you'll be taken to the Book Management Menu where you can perfor
 - plan on improving security by implementing strong password hashing instead of plan text storage.
 - want to enhance user interface to be more interactive.
 - will be implementing an advanced search/filter for users to sort books by various criteria.
+- better user storage using a backend system.
